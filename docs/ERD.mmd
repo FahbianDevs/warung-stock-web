@@ -1,0 +1,52 @@
+```mermaid
+erDiagram
+  USERS ||--o{ STOCK_MOVEMENTS : records
+  CATEGORIES ||--o{ PRODUCTS : has
+  SUPPLIERS ||--o{ PRODUCTS : supplies
+  PRODUCTS ||--o{ STOCK_MOVEMENTS : has
+
+  USERS {
+    bigint id PK
+    string name
+    string email
+  }
+
+  CATEGORIES {
+    bigint id PK
+    string name UK
+  }
+
+  SUPPLIERS {
+    bigint id PK
+    string name
+    string phone
+    text address
+  }
+
+  PRODUCTS {
+    bigint id PK
+    string sku UK
+    string name
+    bigint category_id FK
+    bigint supplier_id FK
+    string unit
+    int min_stock
+    int current_stock
+    decimal purchase_price
+    decimal selling_price
+    date expiry_date
+    bool is_active
+  }
+
+  STOCK_MOVEMENTS {
+    bigint id PK
+    bigint product_id FK
+    bigint user_id FK
+    string type
+    int qty
+    int before_stock
+    int after_stock
+    datetime happened_at
+    string note
+  }
+```

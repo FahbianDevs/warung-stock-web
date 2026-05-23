@@ -1,0 +1,15 @@
+```mermaid
+flowchart TD
+  A[Login] --> B[Dashboard]
+  B --> C[Kelola Produk]
+  B --> D[Catat Pergerakan Stok]
+  C --> C1[Tambah/Edit/Hapus Produk]
+  D --> D1{Tipe}
+  D1 -->|Masuk| E[Tambah stok]
+  D1 -->|Keluar| F[Kurangi stok]
+  D1 -->|Adjustment| G[Set stok]
+  E --> H[Simpan stock_movements]
+  F --> H
+  G --> H
+  H --> B
+```
