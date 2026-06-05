@@ -1,18 +1,25 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="d-flex align-items-center justify-content-between mb-3">
-        <h1 class="h4 m-0">Tambah Produk</h1>
-        <a class="btn btn-outline-secondary btn-sm" href="{{ route('products.index') }}">Kembali</a>
-    </div>
+    @php
+        $actions = '<a class="btn btn-outline-secondary btn-sm shadow-sm" href="' . route('products.index') . '"><i class="fas fa-arrow-left me-2"></i>Kembali</a>';
+    @endphp
 
-    <div class="card">
-        <div class="card-body">
-            <form method="POST" action="{{ route('products.store') }}">
-                @csrf
-                @include('products.partials.form', ['product' => null])
-                <button class="btn btn-primary" type="submit">Simpan</button>
-            </form>
-        </div>
-    </div>
+    @include('components.page-header', [
+        'title' => 'Tambah Produk',
+        'subtitle' => 'Isi informasi barang baru dengan format yang konsisten dan mudah dipelihara.',
+        'actions' => $actions,
+    ])
+
+    @include('components.content-card', [
+        'title' => 'Form Produk',
+        'slot' => view('products.partials.form-wrapper', [
+            'action' => route('products.store'),
+            'method' => 'POST',
+            'submitLabel' => 'Simpan Produk',
+            'product' => null,
+            'categories' => $categories,
+            'suppliers' => $suppliers,
+        ])->render(),
+    ])
 @endsection

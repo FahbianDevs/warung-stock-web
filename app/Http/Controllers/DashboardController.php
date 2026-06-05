@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\UserRole;
 use App\Inventory\Models\Product;
 use Illuminate\View\View;
 
 class DashboardController extends Controller
 {
-    public function index(): View
+    public function admin(): View
     {
         $lowStockProducts = Product::query()
             ->whereColumn('current_stock', '<=', 'min_stock')
@@ -26,6 +27,13 @@ class DashboardController extends Controller
         return view('dashboard', [
             'lowStockProducts' => $lowStockProducts,
             'expiringSoonProducts' => $expiringSoonProducts,
+        ]);
+    }
+
+    public function user(): View
+    {
+        return view('user-dashboard', [
+            'currentRole' => UserRole::User,
         ]);
     }
 }

@@ -1,19 +1,25 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="d-flex align-items-center justify-content-between mb-3">
-        <h1 class="h4 m-0">Edit Produk</h1>
-        <a class="btn btn-outline-secondary btn-sm" href="{{ route('products.index') }}">Kembali</a>
-    </div>
+    @php
+        $actions = '<a class="btn btn-outline-secondary btn-sm shadow-sm" href="' . route('products.index') . '"><i class="fas fa-arrow-left me-2"></i>Kembali</a>';
+    @endphp
 
-    <div class="card">
-        <div class="card-body">
-            <form method="POST" action="{{ route('products.update', $product) }}">
-                @csrf
-                @method('PUT')
-                @include('products.partials.form', ['product' => $product])
-                <button class="btn btn-primary" type="submit">Update</button>
-            </form>
-        </div>
-    </div>
+    @include('components.page-header', [
+        'title' => 'Edit Produk',
+        'subtitle' => 'Perbarui informasi barang tanpa mengubah alur bisnis yang sudah ada.',
+        'actions' => $actions,
+    ])
+
+    @include('components.content-card', [
+        'title' => 'Form Produk',
+        'slot' => view('products.partials.form-wrapper', [
+            'action' => route('products.update', $product),
+            'method' => 'PUT',
+            'submitLabel' => 'Update Produk',
+            'product' => $product,
+            'categories' => $categories,
+            'suppliers' => $suppliers,
+        ])->render(),
+    ])
 @endsection
