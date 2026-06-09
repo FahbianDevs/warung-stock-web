@@ -11,11 +11,7 @@
         'actions' => $actions,
     ])
 
-    @include('components.content-card', [
-        'title' => 'Daftar Produk',
-        'bodyClass' => 'card-body p-0',
-        'slot' => view('products.partials.table', compact('products'))->render(),
-    ])
+    @include('products.partials.table', compact('products'))
 
     <div class="mt-4">
         {{ $products->links('pagination::bootstrap-5') }}

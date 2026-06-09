@@ -11,11 +11,7 @@
         'actions' => $actions,
     ])
 
-    @include('components.content-card', [
-        'title' => 'Pergerakan Stok',
-        'bodyClass' => 'card-body p-0',
-        'slot' => view('stock_movements.partials.table', compact('movements'))->render(),
-    ])
+    @include('stock_movements.partials.table', compact('movements'))
 
     <div class="mt-4">
         {{ $movements->links('pagination::bootstrap-5') }}

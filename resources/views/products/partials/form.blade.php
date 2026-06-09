@@ -3,6 +3,24 @@
 @endphp
 
 <div class="row g-4">
+    <div class="col-12">
+        <div class="stepper">
+            <span class="active">1. Identitas</span>
+            <span>2. Stok & Harga</span>
+            <span>3. Supplier</span>
+        </div>
+    </div>
+
+    <div class="col-12">
+        <div class="upload-dropzone">
+            <i class="fas fa-cloud-arrow-up"></i>
+            <div>
+                <strong>Upload preview produk</strong>
+                <span>Drag & drop gambar produk, barcode, atau foto rak. Integrasi penyimpanan bisa ditambahkan saat field gambar tersedia.</span>
+            </div>
+        </div>
+    </div>
+
     <div class="col-md-6">
         <label class="form-label fw-semibold">Nama</label>
         <input class="form-control @error('name') is-invalid @enderror" name="name" value="{{ $value('name') }}" required />
@@ -11,7 +29,10 @@
 
     <div class="col-md-6">
         <label class="form-label fw-semibold">SKU (opsional)</label>
-        <input class="form-control @error('sku') is-invalid @enderror" name="sku" value="{{ $value('sku') }}" />
+        <div class="input-group">
+            <input class="form-control @error('sku') is-invalid @enderror" name="sku" value="{{ $value('sku') }}" placeholder="Auto generate SKU" />
+            <button class="btn btn-soft" type="button"><i class="fas fa-wand-magic-sparkles"></i></button>
+        </div>
         @error('sku') <div class="invalid-feedback">{{ $message }}</div> @enderror
     </div>
 
